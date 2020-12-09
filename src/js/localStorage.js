@@ -5,7 +5,6 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
-localStorage.setItem('theme', JSON.stringify(Theme));
 
 const savedTheme = localStorage.getItem('theme');
 
@@ -14,6 +13,10 @@ const parsedTheme = JSON.parse(savedTheme);
 let currentThemeParse = JSON.parse(localStorage.getItem('currentTheme'));
 
 refs.body.classList.add(currentThemeParse);
+
+if (refs.body.classList.contains(parsedTheme.DARK)) {
+  refs.themeSwitch.checked = true;
+}
 
 function changeTheme() {
     if (refs.body.classList.contains(parsedTheme.DARK)) {
@@ -29,4 +32,4 @@ function changeTheme() {
     };
 }
 
-refs.themeSwitch.addEventListener('change', () => changeTheme());
+refs.themeSwitch.addEventListener('change', changeTheme);
